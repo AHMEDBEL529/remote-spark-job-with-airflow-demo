@@ -1,0 +1,52 @@
+version: '3.1'
+
+services:
+
+  spark-service:
+    image: custom-spark
+    container_name: spark-master
+    hostname: spark-service
+    networks:
+      - codespaces-blank_1866cb_airflow
+    ports:
+        - "8081:8080"
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - ./spark/app:/opt/airflow/spark/app
+
+  spark-worker-1:
+    image: bitnami/spark:3.5
+    container_name: spark-worker-1
+    hostname: spark-worker-1
+    networks:
+      - codespaces-blank_1866cb_airflow
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-service:7077
+      - SPARK_WORKER_MEMORY=1g
+      - SPARK_WORKER_CORES=1
+    volumes:
+      - ./spark/app:/opt/airflow/spark/app
+
+  spark-worker-2:
+    image: bitnami/spark:3.5
+    container_name: spark-worker-2
+    hostname: spark-worker-2
+    networks:
+      - codespaces-blank_1866cb_airflow
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-service:7077
+      - SPARK_WORKER_MEMORY=1g
+      - SPARK_WORKER_CORES=1
+    volumes:
+      - ./spark/app:/opt/airflow/spark/app
+
+networks:
+  codespaces-blank_1866cb_airflow:
+    external: true
