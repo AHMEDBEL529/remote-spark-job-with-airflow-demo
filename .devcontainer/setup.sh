@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir -p /workspaces/remote-spark-job-with-airflow-demo/spark/app
+# mkdir -p /workspaces/remote-spark-job-with-airflow-demo/spark/app
 
 # Start the Astronomer development environment
 astro dev start -n --wait 8m
