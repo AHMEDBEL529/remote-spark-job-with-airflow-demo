@@ -56,5 +56,5 @@ This repository contains the following files and folders:
 - `packages.txt`: system-level packages to be installed in the Airflow environment upon building of the Dockerimage.
 - `README.md`: this Readme.
 - `requirements.txt`: python packages to be installed to be used by DAGs upon building of the Dockerimage.
-- `.gitpod.yml` : This file instructs Gitpod on how to prepare and build a project, such as starting development servers and configuring Prebuilds.
+- `.gitpod.yml` : This file instructs Gitpod on how to prepare and build the project in case you run it on gitpod.
 
