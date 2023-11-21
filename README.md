@@ -23,7 +23,7 @@ Run this Airflow project without installing anything locally.
 3. After creating the codespaces project the Astro CLI will automatically start up all necessary Airflow components. This can take a few minutes. 
 4. Once the Airflow project has started access the Airflow UI by clicking on the **Ports** tab and opening the forward URL for port 8080.
 
-### Option 2: Use Gitpod Browser Extension
+### Option 2: Use Gitpod
 
 1. Install the Gitpod extension for your browser:
    - [Gitpod for Chrome](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki)
