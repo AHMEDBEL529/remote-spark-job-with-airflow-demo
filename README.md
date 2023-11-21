@@ -3,8 +3,6 @@ Overview
 
 Welcome to this demo repository to show how to run pyspark applications on remote spark clusters using SSHOperator :rocket:.
 
-This repository contains a functional airflow pipeline that can be run in GitHub codespaces.
-
 This Airflow pipeline will trigger the execution of a basic pyspark application that can be tested on other applications.
 
 -------------------------------
