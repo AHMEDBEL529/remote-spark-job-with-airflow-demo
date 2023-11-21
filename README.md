@@ -45,7 +45,6 @@ This repository contains the following files and folders:
 
 - `.astro`: files necessary for Astro CLI commands.
 - `.devcontainer`: the GH codespaces configuration.
-
 -  `dags`: all DAGs in your Airflow environment.
 - `plugins`: folder to place Airflow plugins. Empty.
 - `tests`: folder to place pytests running on DAGs in the Airflow instance. Contains default tests.
@@ -57,4 +56,5 @@ This repository contains the following files and folders:
 - `packages.txt`: system-level packages to be installed in the Airflow environment upon building of the Dockerimage.
 - `README.md`: this Readme.
 - `requirements.txt`: python packages to be installed to be used by DAGs upon building of the Dockerimage.
+- `.gitpod.yml` : This file instructs Gitpod on how to prepare and build a project, such as starting development servers and configuring Prebuilds.
 
