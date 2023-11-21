@@ -2,7 +2,7 @@
 mkdir -p /workspaces/remote-spark-job-with-airflow-demo/spark/app
 
 # Wait for Docker daemon to be ready
-sleep 10
+sleep 20
 
 # Start the Astronomer development environment
 astro dev start -n --wait 8m
