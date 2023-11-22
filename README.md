@@ -45,7 +45,7 @@ Run this Airflow project without installing anything locally.
 
 3. To see the logs of the execution of the spark job, access the logs of the `run_job` task.
 
-   ![Ports](src/Screenshot2023-11-22111038.png)
+   ![Tasks](src/Screenshot2023-11-22111038.png)
 
 -------------------------------
 
