@@ -5,7 +5,6 @@ Welcome to this demo repository to show how to run pyspark applications on remot
 
 This Airflow pipeline will trigger the execution of a basic pyspark application that can be tested on other applications.
 
-![Overview](src/Untitled-2023-10-04-1651gyj.png)
 -------------------------------
 
 How to use this repository
@@ -39,13 +38,35 @@ Run this Airflow project without installing anything locally.
 ## Run the project
 
 1. Unpause `remote_spark_job_example` DAG, by clicking on the toggle on the left hand side. Once the `remote_spark_job_example` DAG is unpaused it will run once, starting the pipeline.
+
  ![Ports](src/Screenshot2023-11-22113737.png)
-3. To open the Spark UI app, go to the **Ports** tab and open the URL of the forwarded port `8081`.
-4. To see the logs of the execution of the spark job, access the logs of the `run_job` task.
+ 
+2. To open the Spark UI app, go to the **Ports** tab and open the URL of the forwarded port `8081`.
+
+3. To see the logs of the execution of the spark job, access the logs of the `run_job` task.
 
    ![Ports](src/Screenshot2023-11-22111038.png)
 
+-------------------------------
 
+How it works
+============
+
+## Components and infrastructure
+
+This repository uses a [custom codespaces container](https://github.com/astronomer/devcontainer-features/pkgs/container/devcontainer-features%2Fastro-cli) to install the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli). The GH codespaces post creation command will start up the Astro project by running `astro dev start`. 
+
+5 Docker containers will be created and relevant ports will be forwarded:
+
+- The Airflow scheduler
+- The Airflow webserver
+- The Airflow metastore
+- The Airflow triggerer
+- A Spark master
+- 2 Spark workers
+
+  ![Overview](src/Untitled-2023-10-04-1651gyj.png)
+  
 -------------------------------
 
 Project Structure
