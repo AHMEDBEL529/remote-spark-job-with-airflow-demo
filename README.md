@@ -33,20 +33,27 @@ Run this Airflow project without installing anything locally.
 
 4. Once the Airflow project has started, access the Airflow UI by clicking on the **Ports** tab and opening the forward URL for port 8080.
 
-   ![Ports](src/Screenshot2023-11-22113902.png)
+   <p align="center">
+  <img src="src/Screenshot2023-11-22113902.png" alt="Ports">
+   </p>
 
 ## Run the project
 
 1. Unpause `remote_spark_job_example` DAG, by clicking on the toggle on the left hand side. Once the `remote_spark_job_example` DAG is unpaused it will run once, starting the pipeline.
 
  ![Ports](src/Screenshot2023-11-22113737.png)
+
+<p align="center">
+  <img src="src/Screenshot2023-11-22113737.png" alt="Ports">
+</p>
  
 2. To open the Spark UI app, go to the **Ports** tab and open the URL of the forwarded port `8081`.
 
 3. To see the logs of the execution of the spark job, access the logs of the `run_job` task.
 
-   ![Tasks](src/Screenshot2023-11-22111038.png)
-
+<p align="center">
+  <img src="src/Screenshot2023-11-22111038.png" alt="Tasks">
+</p>
 -------------------------------
 
 How it works
@@ -65,7 +72,9 @@ This repository uses a [custom codespaces container](https://github.com/astronom
 - A Spark master
 - 2 Spark workers
 
-  ![Overview](src/Untitled-2023-10-04-1651gyj.png)
+  <p align="center">
+  <img src="src/Untitled-2023-10-04-1651gyj.png" alt="Overview">
+  </p>
   
 -------------------------------
 
