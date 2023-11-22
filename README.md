@@ -41,8 +41,6 @@ Run this Airflow project without installing anything locally.
 
 1. Unpause `remote_spark_job_example` DAG, by clicking on the toggle on the left hand side. Once the `remote_spark_job_example` DAG is unpaused it will run once, starting the pipeline.
 
- ![Ports](src/Screenshot2023-11-22113737.png)
-
 <p align="center">
   <img src="src/Screenshot2023-11-22113737.png" alt="Ports">
 </p>
@@ -54,6 +52,7 @@ Run this Airflow project without installing anything locally.
 <p align="center">
   <img src="src/Screenshot2023-11-22111038.png" alt="Tasks">
 </p>
+
 -------------------------------
 
 How it works
