@@ -33,6 +33,11 @@ Run this Airflow project without installing anything locally.
 
 4. Once the Airflow project has started, access the Airflow UI by clicking on the **Ports** tab and opening the forward URL for port 8080.
 
+## Run the project
+
+1. Unpause `remote_spark_job_example` DAG, by clicking on the toggle on the left hand side. Once the `remote_spark_job_example` DAG is unpaused it will run once, starting the pipeline.
+2. To open the Spark UI app, go to the **Ports** tab and open the URL of the forwarded port `8081`.
+3. To see the logs of the execution of the spark job, access the logs of the `run_job` task.
 
 -------------------------------
 
