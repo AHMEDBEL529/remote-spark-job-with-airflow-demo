@@ -4,6 +4,8 @@ airflow_settings.yaml
 __pycache__/
 astro
 .venv
+spark/
+docker-compose-spark.yml
 airflow-webserver.pid
 webserver_config.py
 airflow.cfg

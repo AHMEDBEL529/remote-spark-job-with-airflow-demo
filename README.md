@@ -1,49 +1,99 @@
 Overview
 ========
 
-Welcome to Astronomer! This project was generated after you ran 'astro dev init' using the Astronomer CLI. This readme describes the contents of the project, as well as how to run Apache Airflow on your local machine.
+Welcome to this demo repository to show how to run pyspark applications on remote spark clusters using SSHOperator :rocket:.
 
-Project Contents
+This Airflow pipeline will trigger the execution of a basic pyspark application that can be tested on other applications.
+
+-------------------------------
+
+How to use this repository
+==========================
+
+## Setting up
+
+### Option 1: Use GitHub Codespaces
+
+Run this Airflow project without installing anything locally.
+
+1. Fork this repository.
+2. Create a new GitHub codespaces project on your fork. Make sure it uses at least 4 cores!
+3. After creating the codespaces project the Astro CLI will automatically start up all necessary Airflow components. This can take a few minutes. 
+4. Once the Airflow project has started access the Airflow UI by clicking on the **Ports** tab and opening the forward URL for port 8080.
+
+### Option 2: Use Gitpod
+
+1. Install the Gitpod extension for your browser:
+   - [Gitpod for Chrome](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki)
+   - [Gitpod for Firefox](https://addons.mozilla.org/firefox/addon/gitpod/)
+
+2. Click on the Gitpod button that appears in your browser after installing the extension. This will open the project in Gitpod.
+
+3. After Gitpod initializes, the Astro CLI will automatically start up all necessary Airflow components. This can take a few minutes.
+
+4. Once the Airflow project has started, access the Airflow UI by clicking on the **Ports** tab and opening the forward URL for port 8080.
+
+   <p align="center">
+  <img src="src/Screenshot2023-11-22113902.png" alt="Ports">
+   </p>
+
+## Run the project
+
+1. Unpause `remote_spark_job_example` DAG, by clicking on the toggle on the left hand side. Once the `remote_spark_job_example` DAG is unpaused it will run once, starting the pipeline.
+
+<p align="center">
+  <img src="src/Screenshot2023-11-22113737.png" alt="Ports">
+</p>
+ 
+2. To open the Spark UI app, go to the **Ports** tab and open the URL of the forwarded port `8081`.
+
+3. To see the logs of the execution of the spark job, access the logs of the `run_job` task.
+
+<p align="center">
+  <img src="src/Screenshot2023-11-22111038.png" alt="Tasks">
+</p>
+
+-------------------------------
+
+How it works
+============
+
+## Components and infrastructure
+
+This repository uses a [custom codespaces container](https://github.com/astronomer/devcontainer-features/pkgs/container/devcontainer-features%2Fastro-cli) to install the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli). The GH codespaces post creation command will start up the Astro project by running `astro dev start`. 
+
+5 Docker containers will be created and relevant ports will be forwarded:
+
+- The Airflow scheduler
+- The Airflow webserver
+- The Airflow metastore
+- The Airflow triggerer
+- A Spark master
+- 2 Spark workers
+
+  <p align="center">
+  <img src="src/Untitled-2023-10-04-1651gyj.png" alt="Overview">
+  </p>
+  
+-------------------------------
+
+Project Structure
 ================
 
-Your Astro project contains the following files and folders:
+This repository contains the following files and folders:
 
-- dags: This folder contains the Python files for your Airflow DAGs. By default, this directory includes two example DAGs:
-    - `example_dag_basic`: This DAG shows a simple ETL data pipeline example with three TaskFlow API tasks that run daily.
-    - `example_dag_advanced`: This advanced DAG showcases a variety of Airflow features like branching, Jinja templates, task groups and several Airflow operators.
-- Dockerfile: This file contains a versioned Astro Runtime Docker image that provides a differentiated Airflow experience. If you want to execute other commands or overrides at runtime, specify them here.
-- include: This folder contains any additional files that you want to include as part of your project. It is empty by default.
-- packages.txt: Install OS-level packages needed for your project by adding them to this file. It is empty by default.
-- requirements.txt: Install Python packages needed for your project by adding them to this file. It is empty by default.
-- plugins: Add custom or community plugins for your project to this file. It is empty by default.
-- airflow_settings.yaml: Use this local-only file to specify Airflow Connections, Variables, and Pools instead of entering them in the Airflow UI as you develop DAGs in this project.
+- `.astro`: files necessary for Astro CLI commands.
+- `.devcontainer`: the GH codespaces configuration.
+-  `dags`: all DAGs in your Airflow environment.
+- `plugins`: folder to place Airflow plugins. Empty.
+- `tests`: folder to place pytests running on DAGs in the Airflow instance. Contains default tests.
+- `.dockerignore`: list of files to ignore for Docker.
+- `.env`: environment variables. Contains the definition for the SSH Spark connection.
+- `.gitignore`: list of files to ignore for git. Note that `.env` is not ignored in this project.
+- `docker-compose-spark.yml`: Config file a Spark cluster with a master node and two workers.
+- `Dockerfile-spark` : Configures Spark image with SSH, adds user, and starts SSH server.
+- `packages.txt`: system-level packages to be installed in the Airflow environment upon building of the Dockerimage.
+- `README.md`: this Readme.
+- `requirements.txt`: python packages to be installed to be used by DAGs upon building of the Dockerimage.
+- `.gitpod.yml` : This file instructs Gitpod on how to prepare and build the project in case you run it on gitpod.
 
-Deploy Your Project Locally
-===========================
-
-1. Start Airflow on your local machine by running 'astro dev start'.
-
-This command will spin up 4 Docker containers on your machine, each for a different Airflow component:
-
-- Postgres: Airflow's Metadata Database
-- Webserver: The Airflow component responsible for rendering the Airflow UI
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- Triggerer: The Airflow component responsible for triggering deferred tasks
-
-2. Verify that all 4 Docker containers were created by running 'docker ps'.
-
-Note: Running 'astro dev start' will start your project with the Airflow Webserver exposed at port 8080 and Postgres exposed at port 5432. If you already have either of those ports allocated, you can either [stop your existing Docker containers or change the port](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#ports-are-not-available).
-
-3. Access the Airflow UI for your local Airflow project. To do so, go to http://localhost:8080/ and log in with 'admin' for both your Username and Password.
-
-You should also be able to access your Postgres Database at 'localhost:5432/postgres'.
-
-Deploy Your Project to Astronomer
-=================================
-
-If you have an Astronomer account, pushing code to a Deployment on Astronomer is simple. For deploying instructions, refer to Astronomer documentation: https://docs.astronomer.io/cloud/deploy-code/
-
-Contact
-=======
-
-The Astronomer CLI is maintained with love by the Astronomer team. To report a bug or suggest a change, reach out to our support.
